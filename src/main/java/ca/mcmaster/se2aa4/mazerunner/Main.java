@@ -9,6 +9,7 @@ import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Maze.MazeReader;
 import ca.mcmaster.se2aa4.mazerunner.Path.CanonicalPath;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
+import ca.mcmaster.se2aa4.mazerunner.Solver.RightHandSolver;
 
 public class Main {
 
@@ -29,39 +30,41 @@ public class Main {
                     System.out.println(maze.getStartLocation());
                     System.out.println(maze.getEndLocation());
 
+                    // logger.info("Testing path");
+                    // Path path = new CanonicalPath();
+                    // path.add('F');
+                    // path.add('L');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('R');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('R');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('L');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('R');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('F');
+                    // path.add('L');
+                    // path.add('F');
+                    // System.out.println(path.toString());
 
-                    logger.info("Testing path");
-                    Path path = new CanonicalPath();
-                    path.add('F');
-                    path.add('L');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('R');
-                    path.add('F');
-                    path.add('F');
-                    path.add('R');
-                    path.add('F');
-                    path.add('F');
-                    path.add('L');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('R');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('F');
-                    path.add('L');
-                    path.add('F');
-
-                    System.out.println(path.toString());
+                    RightHandSolver solver = new RightHandSolver();
+                    String path = solver.solve(maze);
+                    logger.info("**** Path computed: " + path);
 
                 } else if (args.length == 4 && args[0].equals("-i") && args[2].equals("-p")) {
                     Maze maze = MazeReader.readMaze(args[1]);
@@ -75,6 +78,8 @@ public class Main {
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
             logger.warn("PATH NOT COMPUTED");
+            logger.error(e);
+            e.printStackTrace();
         }
         logger.info("**** Computing path");
         logger.info("** End of MazeRunner");

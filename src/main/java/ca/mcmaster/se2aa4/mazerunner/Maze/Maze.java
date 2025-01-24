@@ -32,6 +32,10 @@ public class Maze {
         return this.maze.get(row).get(column);
     }
 
+    public Tile getTile(Location location) {
+        return this.getTile(location.getRow(), location.getColumn());
+    }
+
     public void printMaze() {
         for (List<Tile> row : this.maze) {
             for (Tile tile : row) {
