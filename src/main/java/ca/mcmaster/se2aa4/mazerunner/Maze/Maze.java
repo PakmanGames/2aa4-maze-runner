@@ -3,6 +3,8 @@ package ca.mcmaster.se2aa4.mazerunner.Maze;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcmaster.se2aa4.mazerunner.Navigation.Location;
+
 public class Maze {
     private final List<List<Tile>> maze;
 
@@ -41,5 +43,23 @@ public class Maze {
             }
             System.out.println();
         }
+    }
+
+    public Location getStartLocation() {
+        for (int row = 0; row < this.getRowCount(); row++) {
+            if(this.getTile(row, 0) == Tile.PASS) {
+                return new Location(row, 0);
+            }
+        }
+        return null;
+    }
+
+    public Location getEndLocation() {
+        for (int row = 0; row < this.getRowCount(); row++) {
+            if(this.getTile(row, this.getColumnCount() - 1) == Tile.PASS) {
+                return new Location(row, this.getColumnCount() - 1);
+            }
+        }
+        return null;
     }
 }
