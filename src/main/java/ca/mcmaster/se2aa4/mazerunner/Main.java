@@ -7,6 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Maze.MazeReader;
+import ca.mcmaster.se2aa4.mazerunner.Path.CanonicalPath;
+import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 
 public class Main {
 
@@ -26,6 +28,41 @@ public class Main {
                     maze.printMaze();
                     System.out.println(maze.getStartLocation());
                     System.out.println(maze.getEndLocation());
+
+
+                    logger.info("Testing path");
+                    Path path = new CanonicalPath();
+                    path.add('F');
+                    path.add('L');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('R');
+                    path.add('F');
+                    path.add('F');
+                    path.add('R');
+                    path.add('F');
+                    path.add('F');
+                    path.add('L');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('R');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('F');
+                    path.add('L');
+                    path.add('F');
+
+                    System.out.println(path.toString());
+
                 } else if (args.length == 4 && args[0].equals("-i") && args[2].equals("-p")) {
                     Maze maze = MazeReader.readMaze(args[1]);
                     logger.info("** Starting Maze Runner");

@@ -33,4 +33,19 @@ public class Location {
     public String toString() {
         return "(" + this.row + ", " + this.column + ")";
     }
+
+    public Location move(Direction direction) {
+        switch (direction) {
+            case UP:
+                return new Location(this.row - 1, this.column);
+            case DOWN:
+                return new Location(this.row + 1, this.column);
+            case LEFT:
+                return new Location(this.row, this.column - 1);
+            case RIGHT:
+                return new Location(this.row, this.column + 1);
+            default:
+                return null;
+        }
+    }
 }
