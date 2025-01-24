@@ -15,6 +15,14 @@ public class Runner {
         this.direction = direction;
     }
 
+    public void turnLeft() {
+        this.direction = this.direction.turnLeft();
+    }
+
+    public void turnRight() {
+        this.direction = this.direction.turnRight();
+    }
+
     public Location getLocation() {
         return this.location;
     }
