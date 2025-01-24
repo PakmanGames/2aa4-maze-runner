@@ -24,4 +24,13 @@ public class Location {
     public void setColumn(int column) {
         this.column = column;
     }
+
+    public boolean equals(Location location) {
+        return this.row == location.getRow() && this.column == location.getColumn();
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.row + ", " + this.column + ")";
+    }
 }

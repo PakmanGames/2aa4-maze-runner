@@ -24,6 +24,8 @@ public class Main {
                     logger.info("** Starting Maze Runner");
                     logger.info("**** Reading the maze from file " + args[1]);
                     maze.printMaze();
+                    System.out.println(maze.getStartLocation());
+                    System.out.println(maze.getEndLocation());
                 } else if (args.length == 4 && args[0].equals("-i") && args[2].equals("-p")) {
                     Maze maze = MazeReader.readMaze(args[1]);
                     logger.info("** Starting Maze Runner");
