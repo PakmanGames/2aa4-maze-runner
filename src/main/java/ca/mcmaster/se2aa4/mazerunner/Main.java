@@ -30,38 +30,6 @@ public class Main {
                     System.out.println(maze.getStartLocation());
                     System.out.println(maze.getEndLocation());
 
-                    // logger.info("Testing path");
-                    // Path path = new CanonicalPath();
-                    // path.add('F');
-                    // path.add('L');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('R');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('R');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('L');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('R');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('F');
-                    // path.add('L');
-                    // path.add('F');
-                    // System.out.println(path.toString());
-
                     RightHandSolver solver = new RightHandSolver();
                     String path = solver.solve(maze);
                     logger.info("**** Path computed: " + path);
