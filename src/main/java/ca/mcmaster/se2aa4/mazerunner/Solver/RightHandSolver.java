@@ -5,6 +5,7 @@ import ca.mcmaster.se2aa4.mazerunner.Navigation.Direction;
 import ca.mcmaster.se2aa4.mazerunner.Navigation.Location;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 import ca.mcmaster.se2aa4.mazerunner.Path.CanonicalPath;
+import ca.mcmaster.se2aa4.mazerunner.Path.FactorizedPath;
 import ca.mcmaster.se2aa4.mazerunner.Runner.Runner;
 
 import org.apache.logging.log4j.LogManager;
@@ -21,39 +22,9 @@ public class RightHandSolver implements Solver {
         runner.setDirection(Direction.RIGHT);
         
 
-        Path path = new CanonicalPath();
+        Path path = new FactorizedPath();
         logger.info("Starting at: " + runner.getLocation());
         logger.info("End location: " + endLocation);
-        // System.out.println(runner.getLocation());
-        // System.out.println(endLocation);
-        // System.out.println(runner.getLocation().equals(endLocation));
-        // System.out.println(runner.getLocation().move(runner.getDirection()));
-        // runner.move();
-        // System.out.println(runner.getLocation());
-
-        // runner.turnRight();
-        // System.out.println(runner.getDirection());
-        // runner.move();
-        // System.out.println(runner.getLocation());
-        // System.out.println(maze.getTile(runner.getLocation().move(runner.getDirection())).isWalkable());
-
-        // logger.info("Tile: " + maze.getTile(runner.getLocation().move(runner.getDirection())).isWalkable());
-
-        // while (!runner.getLocation().equals(endLocation)) {
-        //     Location currentLocation = runner.getLocation();
-        //     logger.info("Current location: " + currentLocation + ", Direction: " + runner.getDirection());
-
-        //     if (maze.getTile(currentLocation.move(runner.getDirection())).isWalkable()) {
-        //         path.add('F');
-        //         runner.move();
-        //         logger.info("Moved forward to: " + runner.getLocation());
-        //     } else {
-        //         runner.turnRight();
-        //         path.add('R');
-        //         logger.info("Turned right, new direction: " + runner.getDirection());
-        //     }
-        // }
-
 
         while (!runner.getLocation().equals(endLocation)) {
             Location currentLocation = runner.getLocation();
