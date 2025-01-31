@@ -1,47 +1,65 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
 import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Maze.MazeReader;
-import ca.mcmaster.se2aa4.mazerunner.Path.CanonicalPath;
-import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 import ca.mcmaster.se2aa4.mazerunner.Solver.RightHandSolver;
 
 public class Main {
 
     private static final Logger logger = LogManager.getLogger();
-    // info, error, debug, trace
 
     public static void main(String[] args) {
+        Options options = new Options();
+        CommandLineParser parser = new DefaultParser();
+
+        Option input = new Option("i", "input", true, "input file path");
+        input.setRequired(true);
+        options.addOption(input);
+
+        Option mazePath = new Option("p", "path", true, "path to output file");
+        mazePath.setRequired(false);
+        options.addOption(mazePath);
+
+        CommandLine cmd;
+
         try {
-            System.out.println(args.length);
-            if (args.length == 0) {
-                logger.error("No arguments passed.");
-            } else if (args.length > 0) {
-                if (args.length == 2 && args[0].equals("-i")) {
-                    Maze maze = MazeReader.readMaze(args[1]);
-                    logger.info("** Starting Maze Runner");
-                    logger.info("**** Reading the maze from file " + args[1]);
-                    maze.printMaze();
-                    System.out.println(maze.getStartLocation());
-                    System.out.println(maze.getEndLocation());
+            cmd = parser.parse(options, args);
+        } catch (Exception e) {
+            logger.error("Failed to parse command line arguments: " + e.getMessage());
+            System.exit(1);
+            return;
+        }
 
-                    RightHandSolver solver = new RightHandSolver();
-                    String path = solver.solve(maze);
-                    logger.info("**** Path computed: " + path);
+        String inputFilePath = cmd.getOptionValue("input");
+        String pathFilePath = cmd.getOptionValue("path");
 
-                } else if (args.length == 4 && args[0].equals("-i") && args[2].equals("-p")) {
-                    Maze maze = MazeReader.readMaze(args[1]);
-                    logger.info("** Starting Maze Runner");
-                    logger.info("**** Reading the maze from file " + args[1]);
-                    maze.printMaze();
+        try {
+            if (inputFilePath != null && pathFilePath == null) {
+                Maze maze = MazeReader.readMaze(inputFilePath);
+                logger.info("** Starting Maze Runner");
+                logger.info("**** Reading the maze from file " + inputFilePath);
+                maze.printMaze();
+                System.out.println(maze.getStartLocation());
+                System.out.println(maze.getEndLocation());
 
-                    // do something with args[3]
-                }
+                RightHandSolver solver = new RightHandSolver();
+                String path = solver.solve(maze);
+                logger.info("**** Path computed: " + path);
+
+            } else if (inputFilePath != null && pathFilePath != null) {
+                Maze maze = MazeReader.readMaze(inputFilePath);
+                logger.info("** Starting Maze Runner");
+                logger.info("**** Reading the maze from file " + inputFilePath);
+                maze.printMaze();
+
+                // do something with -p flag path stuff
             }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
