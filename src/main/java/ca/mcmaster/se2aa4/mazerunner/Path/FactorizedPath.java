@@ -12,8 +12,7 @@ public class FactorizedPath extends Path {
 
     @Override
     public void add(char direction) {
-        if (this.path.length() == 0) {
-            this.path.append(direction);
+        if (this.lastDirection == '\0') {  // First move
             this.lastDirection = direction;
             this.count = 1;
         } else {
@@ -21,10 +20,11 @@ public class FactorizedPath extends Path {
                 this.count++;
             } else {
                 if (this.count > 1) {
-                    this.path.append(this.count);
+                    this.path.append(this.count).append(this.lastDirection);
+                } else {
+                    this.path.append(this.lastDirection);
                 }
-                this.path.append(" ");
-                this.path.append(direction);
+                this.path.append(" "); // Space between segments
                 this.lastDirection = direction;
                 this.count = 1;
             }
@@ -34,7 +34,9 @@ public class FactorizedPath extends Path {
     @Override
     public String toString() {
         if (this.count > 1) {
-            this.path.append(this.count);
+            this.path.append(this.count).append(this.lastDirection);
+        } else {
+            this.path.append(this.lastDirection);
         }
         return this.path.toString().trim();
     }
