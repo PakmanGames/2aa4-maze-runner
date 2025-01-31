@@ -56,6 +56,6 @@ public class RightHandSolver implements Solver {
             runner.move();
             logger.info("Moved to: " + runner.getLocation() + ", Direction: " + runner.getDirection());
         }
-        return path.toString();
+        return FactorizedPath.convertToFactorized(CanonicalPath.convertToCanonical(path.toString()));
     }
 }

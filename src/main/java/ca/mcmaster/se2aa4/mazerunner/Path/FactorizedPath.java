@@ -12,7 +12,7 @@ public class FactorizedPath extends Path {
 
     @Override
     public void add(char direction) {
-        if (this.lastDirection == '\0') {  // First move
+        if (this.lastDirection == '\0') {
             this.lastDirection = direction;
             this.count = 1;
         } else {
@@ -24,11 +24,29 @@ public class FactorizedPath extends Path {
                 } else {
                     this.path.append(this.lastDirection);
                 }
-                this.path.append(" "); // Space between segments
+                this.path.append(" ");
                 this.lastDirection = direction;
                 this.count = 1;
             }
         }
+    }
+
+    public static String convertToFactorized(String canonicalPath) {
+        StringBuilder factorizedPath = new StringBuilder();
+        String[] moves = canonicalPath.split(" ");
+
+        for (String move : moves) {
+            char direction = move.charAt(0);
+            int count = move.length();
+
+            if (count > 1) {
+                factorizedPath.append(count).append(direction);
+            } else {
+                factorizedPath.append(direction);
+            }
+            factorizedPath.append(" ");
+        }
+        return factorizedPath.toString().trim();
     }
 
     @Override

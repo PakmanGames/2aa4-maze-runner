@@ -19,4 +19,26 @@ public class CanonicalPath extends Path {
             }
         }
     }
+
+    public static String convertToCanonical(String factorizedPath) {
+        StringBuilder canonicalPath = new StringBuilder();
+        String[] directions = factorizedPath.split(" ");
+        for (String direction : directions) {
+            if (direction.length() == 1) {
+                canonicalPath.append(direction);
+            } else {
+                int count = Integer.parseInt(direction.substring(0, direction.length() - 1));
+                char dir = direction.charAt(direction.length() - 1);
+                for (int i = 0; i < count; i++) {
+                    canonicalPath.append(dir);
+                }
+            }
+            canonicalPath.append(" ");
+        }
+        return canonicalPath.toString().trim();
+    }
+
+    public String toString() {
+        return this.path.toString();
+    }
 }
