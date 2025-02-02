@@ -10,6 +10,7 @@ import org.apache.commons.cli.Option;
 import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Maze.MazeReader;
 import ca.mcmaster.se2aa4.mazerunner.Solver.RightHandSolver;
+import ca.mcmaster.se2aa4.mazerunner.Path.CanonicalPath;
 
 public class Main {
 
@@ -38,10 +39,10 @@ public class Main {
         }
 
         String inputFilePath = cmd.getOptionValue("input");
-        String pathFilePath = cmd.getOptionValue("path");
+        String pathInput = cmd.getOptionValue("path");
 
         try {
-            if (inputFilePath != null && pathFilePath == null) {
+            if (inputFilePath != null && pathInput == null) {
                 Maze maze = MazeReader.readMaze(inputFilePath);
                 logger.info("** Starting Maze Runner");
                 logger.info("**** Reading the maze from file " + inputFilePath);
@@ -53,13 +54,23 @@ public class Main {
                 String path = solver.solve(maze);
                 logger.info("**** Path computed: " + path);
 
-            } else if (inputFilePath != null && pathFilePath != null) {
+            } else if (inputFilePath != null && pathInput != null) {
                 Maze maze = MazeReader.readMaze(inputFilePath);
                 logger.info("** Starting Maze Runner");
                 logger.info("**** Reading the maze from file " + inputFilePath);
                 maze.printMaze();
 
-                // do something with -p flag path stuff
+                logger.info("The path is: " + pathInput);
+
+                RightHandSolver solver = new RightHandSolver();
+                String factorizedPathAnswer = solver.solve(maze);
+                String canonicalPathAnswer = CanonicalPath.convertToCanonical(factorizedPathAnswer);
+
+                if (factorizedPathAnswer.equals(pathInput) || canonicalPathAnswer.equals(pathInput)) {
+                    logger.info("The path is correct!");
+                } else {
+                    logger.info("The path is incorrect!");
+                }
             }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
