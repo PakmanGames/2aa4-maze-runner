@@ -44,36 +44,26 @@ public class Main {
         try {
             if (inputFilePath != null && pathInput == null) {
                 Maze maze = MazeReader.readMaze(inputFilePath);
-                logger.info("** Starting Maze Runner");
-                logger.info("**** Reading the maze from file " + inputFilePath);
                 maze.printMaze();
 
                 RightHandSolver solver = new RightHandSolver();
                 String path = solver.solve(maze);
-                logger.info("**** Path computed: " + path);
+                System.out.println("The correct path is " + path);
 
             } else if (inputFilePath != null && pathInput != null) {
                 Maze maze = MazeReader.readMaze(inputFilePath);
-                logger.info("** Starting Maze Runner");
-                logger.info("**** Reading the maze from file " + inputFilePath);
                 maze.printMaze();
 
-                logger.info("The entered path is: " + pathInput);
-
                 if (maze.isPathCorrect(pathInput)) {
-                    logger.info("The path is correct!");
+                    System.out.println("Correct path.");
                 } else {
-                    logger.info("The path is incorrect!");
-                    logger.info("The correct path is: " + CanonicalPath.convertToCanonical(maze.getCorrectPath()));
+                    System.out.println("Incorrect path.");
+                    System.out.println("The correct path is " + CanonicalPath.convertToCanonical(maze.getCorrectPath()));
                 }
             }
         } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
-            logger.warn("PATH NOT COMPUTED");
-            logger.error(e);
+            System.out.println("Error occurred while computing path.");
             e.printStackTrace();
         }
-        logger.info("**** Computing path");
-        logger.info("** End of MazeRunner");
     }
 }

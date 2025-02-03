@@ -23,8 +23,6 @@ public class RightHandSolver implements Solver {
         
 
         Path path = new FactorizedPath();
-        logger.info("Starting at: " + runner.getLocation());
-        logger.info("End location: " + endLocation);
 
         while (!runner.getLocation().equals(endLocation)) {
             Location currentLocation = runner.getLocation();
