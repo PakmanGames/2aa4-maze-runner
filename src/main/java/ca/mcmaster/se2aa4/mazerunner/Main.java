@@ -47,8 +47,6 @@ public class Main {
                 logger.info("** Starting Maze Runner");
                 logger.info("**** Reading the maze from file " + inputFilePath);
                 maze.printMaze();
-                System.out.println(maze.getStartLocation());
-                System.out.println(maze.getEndLocation());
 
                 RightHandSolver solver = new RightHandSolver();
                 String path = solver.solve(maze);
@@ -60,16 +58,13 @@ public class Main {
                 logger.info("**** Reading the maze from file " + inputFilePath);
                 maze.printMaze();
 
-                logger.info("The path is: " + pathInput);
+                logger.info("The entered path is: " + pathInput);
 
-                RightHandSolver solver = new RightHandSolver();
-                String factorizedPathAnswer = solver.solve(maze);
-                String canonicalPathAnswer = CanonicalPath.convertToCanonical(factorizedPathAnswer);
-
-                if (factorizedPathAnswer.equals(pathInput) || canonicalPathAnswer.equals(pathInput)) {
+                if (maze.isPathCorrect(pathInput)) {
                     logger.info("The path is correct!");
                 } else {
                     logger.info("The path is incorrect!");
+                    logger.info("The correct path is: " + CanonicalPath.convertToCanonical(maze.getCorrectPath()));
                 }
             }
         } catch(Exception e) {

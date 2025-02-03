@@ -54,7 +54,6 @@ public class RightHandSolver implements Solver {
             }
             path.add('F');
             runner.move();
-            logger.info("Moved to: " + runner.getLocation() + ", Direction: " + runner.getDirection());
         }
         return FactorizedPath.convertToFactorized(CanonicalPath.convertToCanonical(path.toString()));
     }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcmaster.se2aa4.mazerunner.Navigation.Location;
+import ca.mcmaster.se2aa4.mazerunner.Solver.RightHandSolver;
+import ca.mcmaster.se2aa4.mazerunner.Path.CanonicalPath;
 
 public class Maze {
     private final List<List<Tile>> maze;
@@ -65,5 +67,18 @@ public class Maze {
             }
         }
         return null;
+    }
+
+    public String getCorrectPath() {
+        RightHandSolver solver = new RightHandSolver();
+        return solver.solve(this);
+    }
+
+    public Boolean isPathCorrect(String path) {
+        RightHandSolver solver = new RightHandSolver();
+        String factorizedPathAnswer = solver.solve(this);
+        String canonicalPathAnswer = CanonicalPath.convertToCanonical(factorizedPathAnswer);
+
+        return factorizedPathAnswer.equals(path) || canonicalPathAnswer.equals(path);
     }
 }
